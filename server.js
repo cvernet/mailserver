@@ -143,7 +143,7 @@ var SampleApp = function() {
         
       self.routes['/imap'] = function(req, res) {
           
-          res.send("GO IMAP");
+          res.write("GO IMAP");
           
           var imap = new Imap({
           user: 'cvernet@gmail.com',
@@ -165,7 +165,7 @@ var SampleApp = function() {
               struct: true
             });
             f.on('message', function(msg, seqno) {
-              res.send('Message #%d', seqno);
+              res.write('Message #%d', seqno);
               var prefix = '(#' + seqno + ') ';
               msg.on('body', function(stream, info) {
                 var buffer = '';
@@ -173,18 +173,18 @@ var SampleApp = function() {
                   buffer += chunk.toString('utf8');
                 });
                 stream.once('end', function() {
-                  res.send(prefix + 'Parsed header: %s', inspect(Imap.parseHeader(buffer)));
+                  res.write(prefix + 'Parsed header: %s', inspect(Imap.parseHeader(buffer)));
                 });
               });
               msg.once('attributes', function(attrs) {
-                res.send(prefix + 'Attributes: %s', inspect(attrs, false, 8));
+                res.write(prefix + 'Attributes: %s', inspect(attrs, false, 8));
               });
               msg.once('end', function() {
-                res.send(prefix + 'Finished');
+                res.write(prefix + 'Finished');
               });
             });
             f.once('error', function(err) {
-              res.send('Fetch error: ' + err);
+              res.write('Fetch error: ' + err);
             });
             f.once('end', function() {
               res.send('Done fetching all messages!');
@@ -194,11 +194,11 @@ var SampleApp = function() {
         });
 
         imap.once('error', function(err) {
-          res.send(err);
+          res.write(err);
         });
 
         imap.once('end', function() {
-          res.send('Connection ended');
+          res.write('Connection ended');
         });
 
         imap.connect();
