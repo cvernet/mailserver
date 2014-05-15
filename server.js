@@ -143,6 +143,64 @@ var SampleApp = function() {
         
       self.routes['/imap'] = function(req, res) {
           
+          var imap = new Imap({
+          user: 'cvernet@gmail.com',
+          password: 'schdln_cver',
+          host: 'imap.gmail.com',
+          port: 993,
+          tls: true
+        });
+
+        function openInbox(cb) {
+          imap.openBox('INBOX', true, cb);
+        }
+
+        imap.once('ready', function() {
+          openInbox(function(err, box) {
+            if (err) throw err;
+            var f = imap.seq.fetch('1:3', {
+              bodies: 'HEADER.FIELDS (FROM TO SUBJECT DATE)',
+              struct: true
+            });
+            f.on('message', function(msg, seqno) {
+              res.send('Message #%d', seqno);
+              var prefix = '(#' + seqno + ') ';
+              msg.on('body', function(stream, info) {
+                var buffer = '';
+                stream.on('data', function(chunk) {
+                  buffer += chunk.toString('utf8');
+                });
+                stream.once('end', function() {
+                  res.send(prefix + 'Parsed header: %s', inspect(Imap.parseHeader(buffer)));
+                });
+              });
+              msg.once('attributes', function(attrs) {
+                res.send(prefix + 'Attributes: %s', inspect(attrs, false, 8));
+              });
+              msg.once('end', function() {
+                res.send(prefix + 'Finished');
+              });
+            });
+            f.once('error', function(err) {
+              res.send('Fetch error: ' + err);
+            });
+            f.once('end', function() {
+              res.send('Done fetching all messages!');
+              imap.end();
+            });
+          });
+        });
+
+        imap.once('error', function(err) {
+          res.send(err);
+        });
+
+        imap.once('end', function() {
+          res.send('Connection ended');
+        });
+
+        imap.connect();
+          
 
       };
           
