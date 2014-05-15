@@ -167,7 +167,7 @@ var SampleApp = function() {
               struct: true
             });
             f.on('message', function(msg, seqno) {
-              res.write('Message '+ seqno);
+              //res.write('Message '+ seqno);
               var prefix = '(#' + seqno + ') ';
               msg.on('body', function(stream, info) {
                 var buffer = '';
