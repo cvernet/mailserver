@@ -161,8 +161,9 @@ var SampleApp = function() {
 
         imap.once('ready', function() {
           openInbox(function(err, box) {
-            res.write("here " + err);
+            res.write("here ");
             if (err) throw err;
+            res.write("here ");  
             var f = imap.seq.fetch('1:3', {
               bodies: 'HEADER.FIELDS (FROM TO SUBJECT DATE)',
               struct: true
