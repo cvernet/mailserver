@@ -144,6 +144,7 @@ var SampleApp = function() {
       self.routes['/imap'] = function(req, res) {
           
           res.write("GO IMAP");
+          res.write("Suite");
           
           var imap = new Imap({
           user: 'cvernet@gmail.com',
@@ -187,7 +188,8 @@ var SampleApp = function() {
               res.write('Fetch error: ' + err);
             });
             f.once('end', function() {
-              res.send('Done fetching all messages!');
+              res.write('Done fetching all messages!');
+              res.end();
               imap.end();
             });
           });
