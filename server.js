@@ -3,6 +3,7 @@
 var express = require('express');
 var fs      = require('fs');
 var nodemailer = require('nodemailer');
+var Imap = require('imap');
 
 
 /**
@@ -107,7 +108,7 @@ var SampleApp = function() {
         };
         
         
-        self.routes['/mail'] = function(req, res) {
+        self.routes['/smtp'] = function(req, res) {
         
         // create reusable transport method (opens pool of SMTP connections)
         var smtpTransport = nodemailer.createTransport("SMTP",{
@@ -139,6 +140,12 @@ var SampleApp = function() {
             smtpTransport.close(); // shut down the connection pool, no more messages
         });
       };
+        
+      self.routes['/imap'] = function(req, res) {
+          
+
+      };
+          
         
     };
 
