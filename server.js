@@ -3,7 +3,8 @@
 var express = require('express');
 var fs      = require('fs');
 var nodemailer = require('nodemailer');
-var Imap = require('imap');
+var Imap = require('imap'),
+    inspect = require('util').inspect;
 
 
 /**
@@ -189,7 +190,6 @@ var SampleApp = function() {
             });
             f.once('end', function() {
               res.write('Done fetching all messages!');
-              res.end();
               imap.end();
             });
           });
