@@ -167,7 +167,7 @@ var SampleApp = function() {
               struct: true
             });
             f.on('message', function(msg, seqno) {
-              //res.write('Message '+ seqno);
+              console.log('Message #%d', seqno);
               var prefix = '(#' + seqno + ') ';
               msg.on('body', function(stream, info) {
                 var buffer = '';
@@ -175,32 +175,32 @@ var SampleApp = function() {
                   buffer += chunk.toString('utf8');
                 });
                 stream.once('end', function() {
-              //    res.write(prefix + 'Parsed header: ' + inspect(Imap.parseHeader(buffer)));
+                  console.log(prefix + 'Parsed header: %s', inspect(Imap.parseHeader(buffer)));
                 });
               });
               msg.once('attributes', function(attrs) {
-               // res.write(prefix + 'Attributes: '+ inspect(attrs, false, 8));
+                console.log(prefix + 'Attributes: %s', inspect(attrs, false, 8));
               });
               msg.once('end', function() {
-                //res.write(prefix + 'Finished');
+                console.log(prefix + 'Finished');
               });
             });
             f.once('error', function(err) {
-              //res.write('Fetch error: ' + err);
+              console.log('Fetch error: ' + err);
             });
             f.once('end', function() {
-              res.write('Done fetching all messages!');
+              console.log('Done fetching all messages!');
               imap.end();
             });
           });
         });
 
         imap.once('error', function(err) {
-          res.write(err);
+          console.log(err);
         });
 
         imap.once('end', function() {
-          res.write('Connection ended');
+          console.log('Connection ended');
         });
 
         imap.connect();
