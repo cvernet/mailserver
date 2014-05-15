@@ -144,7 +144,6 @@ var SampleApp = function() {
       self.routes['/imap'] = function(req, res) {
           
           res.write("GO IMAP");
-          res.write("Suite");
           
           var imap = new Imap({
           user: 'cvernet@gmail.com',
@@ -156,6 +155,7 @@ var SampleApp = function() {
 
         function openInbox(cb) {
           imap.openBox('INBOX', true, cb);
+          res.write("Open Inbox");
         }
 
         imap.once('ready', function() {
