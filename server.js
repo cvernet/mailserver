@@ -167,8 +167,7 @@ var SampleApp = function() {
               struct: true
             });
             f.on('message', function(msg, seqno) {
-              res.write('ici');
-              res.write('Message #%d', seqno);
+              res.write('Message '+ seqno);
               var prefix = '(#' + seqno + ') ';
               msg.on('body', function(stream, info) {
                 var buffer = '';
@@ -176,11 +175,11 @@ var SampleApp = function() {
                   buffer += chunk.toString('utf8');
                 });
                 stream.once('end', function() {
-                  res.write(prefix + 'Parsed header: %s', inspect(Imap.parseHeader(buffer)));
+                  res.write(prefix + 'Parsed header: ' + inspect(Imap.parseHeader(buffer)));
                 });
               });
               msg.once('attributes', function(attrs) {
-                res.write(prefix + 'Attributes: %s', inspect(attrs, false, 8));
+                res.write(prefix + 'Attributes: '+ inspect(attrs, false, 8));
               });
               msg.once('end', function() {
                 res.write(prefix + 'Finished');
