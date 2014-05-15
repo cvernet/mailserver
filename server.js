@@ -175,18 +175,18 @@ var SampleApp = function() {
                   buffer += chunk.toString('utf8');
                 });
                 stream.once('end', function() {
-                  res.write(prefix + 'Parsed header: ' + inspect(Imap.parseHeader(buffer)));
+              //    res.write(prefix + 'Parsed header: ' + inspect(Imap.parseHeader(buffer)));
                 });
               });
               msg.once('attributes', function(attrs) {
-                res.write(prefix + 'Attributes: '+ inspect(attrs, false, 8));
+               // res.write(prefix + 'Attributes: '+ inspect(attrs, false, 8));
               });
               msg.once('end', function() {
-                res.write(prefix + 'Finished');
+                //res.write(prefix + 'Finished');
               });
             });
             f.once('error', function(err) {
-              res.write('Fetch error: ' + err);
+              //res.write('Fetch error: ' + err);
             });
             f.once('end', function() {
               res.write('Done fetching all messages!');
