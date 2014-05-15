@@ -143,6 +143,8 @@ var SampleApp = function() {
         
       self.routes['/imap'] = function(req, res) {
           
+          res.send("GO IMAP");
+          
           var imap = new Imap({
           user: 'cvernet@gmail.com',
           password: 'schdln_cver',
