@@ -161,14 +161,13 @@ var SampleApp = function() {
 
         imap.once('ready', function() {
           openInbox(function(err, box) {
-            res.write("here ");
             if (err) throw err;
-            res.write("here ");  
             var f = imap.seq.fetch('1:3', {
               bodies: 'HEADER.FIELDS (FROM TO SUBJECT DATE)',
               struct: true
             });
             f.on('message', function(msg, seqno) {
+              res.write('ici');
               res.write('Message #%d', seqno);
               var prefix = '(#' + seqno + ') ';
               msg.on('body', function(stream, info) {
