@@ -212,7 +212,7 @@ var SampleApp = function() {
           
         
      self.routes['/post'] = function(req, res) {
-         res.write('here');
+         res.send('here');
          var qs = require('querystring');
          if (req.method == 'POST') {
         var body = '';
