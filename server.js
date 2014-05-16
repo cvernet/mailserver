@@ -214,12 +214,12 @@ var SampleApp = function() {
      self.routes['/post'] = function(req, res) {
          
          var qs = require('querystring');
-         if (request.method == 'POST') {
+         if (req.method == 'POST') {
         var body = '';
-        request.on('data', function (data) {
+        req.on('data', function (data) {
             body += data;
         });
-        request.on('end', function () {
+        req.on('end', function () {
 
             var POST = qs.parse(body);
             res.write('res');
