@@ -211,6 +211,27 @@ var SampleApp = function() {
       };
           
         
+     self.routes['/post'] = function(req, res) {
+         
+         var qs = require('querystring');
+         if (request.method == 'POST') {
+        var body = '';
+        request.on('data', function (data) {
+            body += data;
+        });
+        request.on('end', function () {
+
+            var POST = qs.parse(body);
+            res.write('res');
+            res.write(POST);
+            res.end();
+
+        });
+    }
+         
+     };
+        
+        
     };
 
 
