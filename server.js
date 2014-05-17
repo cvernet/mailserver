@@ -224,7 +224,9 @@ var SampleApp = function() {
             var POST = qs.parse(body);
             res.write('res');
             res.write(body);
-            res.write(POST);
+            json = JSON.stringify(body);
+            res.write('1 : ' + req.body.from);
+            res.write('2 : ' + POST.from);
             res.end();
 
         });
