@@ -226,7 +226,38 @@ var SampleApp = function() {
             res.write('TO : ' + json.to);
             res.write('SUBJECT : ' + json.subject);
             res.write('CONTENT : ' + json.content);
-            res.end();
+            
+            
+                    // create reusable transport method (opens pool of SMTP connections)
+        var smtpTransport = nodemailer.createTransport("SMTP",{
+            service: "Gmail",
+            auth: {
+                user: "cvernet@gmail.com",
+                pass: "schdln_cver"
+            }
+        });
+
+        // setup e-mail data with unicode symbols
+        var mailOptions = {
+            from: json.from, // sender address
+            to: json.to, // list of receivers
+            subject: json.subject, // Subject line
+            text: "", // plaintext body
+            html: json.content // html body
+        }
+
+        // send mail with defined transport object
+        smtpTransport.sendMail(mailOptions, function(error, response){
+            if(error){
+                res.send(error);
+            }else{
+                res.send("Message sent: " + response.message);
+            }
+
+            // if you don't want to use this transport object anymore, uncomment following line
+            smtpTransport.close(); // shut down the connection pool, no more messages
+        });
+            
 
         });
     }
