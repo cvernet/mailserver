@@ -216,6 +216,7 @@ var SampleApp = function() {
 //         
 
     res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
          if (req.method == 'OPTIONS') {res.send("200");}
          
          var qs = require('querystring');
