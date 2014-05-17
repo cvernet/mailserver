@@ -214,7 +214,15 @@ var SampleApp = function() {
      self.routes['/post'] = function(req, res) {
 //         res.send('here '+req.method);
 //         
-         res.setHeader("Access-Control-Allow-Origin", "http://cvernet.host-ed.me");
+   // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
          var qs = require('querystring');
          if (req.method == 'POST') {
         var body = '';
