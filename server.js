@@ -285,6 +285,7 @@ var SampleApp = function() {
         for (var r in self.routes) {
             self.app.get(r, self.routes[r]);
             self.app.post(r, self.routes[r]);
+            self.app.options(r, self.routes[r]);
         }
     };
 
