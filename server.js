@@ -214,7 +214,9 @@ var SampleApp = function() {
      self.routes['/post'] = function(req, res) {
 //         res.send('here '+req.method);
 //         
-   // Website you wish to allow to connect
+
+             if (req.method == 'OPTIONS') {
+    // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
 
     // Request methods you wish to allow
@@ -222,7 +224,10 @@ var SampleApp = function() {
 
     // Request headers you wish to allow
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
+    
+    res.end("Options");             
+             }
+         
          var qs = require('querystring');
          if (req.method == 'POST') {
         var body = '';
