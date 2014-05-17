@@ -221,10 +221,11 @@ var SampleApp = function() {
         });
         req.on('end', function () {
 
-            res.write('res' + body);
             var json = JSON.parse(body);
-            res.write('1 : ' + json);
-            res.write('2 : ' + json.from);
+            res.write('FROM : ' + json.from);
+            res.write('TO : ' + json.to);
+            res.write('SUBJECT : ' + json.subject);
+            res.write('CONTENT : ' + json.content);
             res.end();
 
         });
