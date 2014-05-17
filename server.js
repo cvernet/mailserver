@@ -215,18 +215,8 @@ var SampleApp = function() {
 //         res.send('here '+req.method);
 //         
 
-             if (req.method == 'OPTIONS') {
-    // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
 
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    
-    res.end("Options");             
-             }
          
          var qs = require('querystring');
          if (req.method == 'POST') {
