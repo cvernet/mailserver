@@ -213,6 +213,8 @@ var SampleApp = function() {
         
      self.routes['/post'] = function(req, res) {
 //         res.send('here '+req.method);
+//         
+         res.setHeader("Access-Control-Allow-Origin", "*");
          var qs = require('querystring');
          if (req.method == 'POST') {
         var body = '';
