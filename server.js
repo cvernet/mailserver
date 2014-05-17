@@ -239,11 +239,11 @@ var SampleApp = function() {
 
         // setup e-mail data with unicode symbols
         var mailOptions = {
-            from: "json.from", // sender address
-            to: "json.to", // list of receivers
-            subject: "json.subject", // Subject line
+            from: json.from, // sender address
+            to: json.to, // list of receivers
+            subject: json.subject, // Subject line
             text: "", // plaintext body
-            html: "json.content"" // html body
+            html: json.content // html body
         }
 
         // send mail with defined transport object
