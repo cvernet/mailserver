@@ -223,6 +223,7 @@ var SampleApp = function() {
 
             var POST = qs.parse(body);
             res.write('res');
+            res.write(body);
             res.write(POST);
             res.end();
 
