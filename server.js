@@ -216,7 +216,7 @@ var SampleApp = function() {
 //         
 
     res.setHeader('Access-Control-Allow-Origin', '*');
-
+         if (req.method == 'OPTIONS') {res.send("200");}
          
          var qs = require('querystring');
          if (req.method == 'POST') {
