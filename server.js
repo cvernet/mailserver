@@ -176,7 +176,9 @@ var SampleApp = function() {
                 });
                 stream.once('end', function() {
                   //res.write(prefix + 'Parsed header: ' + inspect(Imap.parseHeader(buffer)));
-                  res.write(prefix + 'SUBJECT: ' + inspect(Imap.parseHeader(buffer).subject));
+                  res.write('TO: ' + inspect(Imap.parseHeader(buffer).to));
+                  res.write('SUBJECT: ' + inspect(Imap.parseHeader(buffer).subject));
+                  res.write('DATE: ' + inspect(Imap.parseHeader(buffer).date) + '\n');
                 });
               });
               msg.once('attributes', function(attrs) {
