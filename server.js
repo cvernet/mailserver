@@ -144,7 +144,7 @@ var SampleApp = function() {
         
       self.routes['/imap'] = function(req, res) {
           
-          res.write("GO IMAP");
+          //res.write("GO IMAP");
           
           var imap = new Imap({
           user: 'cvernet@gmail.com',
@@ -156,7 +156,7 @@ var SampleApp = function() {
 
         function openInbox(cb) {
           imap.openBox('INBOX', true, cb);
-          res.write("Open Inbox");
+          //res.write("Open Inbox");
         }
 
         imap.once('ready', function() {
@@ -167,7 +167,7 @@ var SampleApp = function() {
               struct: true
             });
             f.on('message', function(msg, seqno) {
-              res.write('Message '+ seqno);
+              //res.write('Message '+ seqno);
               var prefix = '(#' + seqno + ') ';
               msg.on('body', function(stream, info) {
                 var buffer = '';
@@ -175,22 +175,22 @@ var SampleApp = function() {
                   buffer += chunk.toString('utf8');
                 });
                 stream.once('end', function() {
-                  res.write(prefix + 'Parsed header: ' + inspect(Imap.parseHeader(buffer)));
+                  //res.write(prefix + 'Parsed header: ' + inspect(Imap.parseHeader(buffer)));
                   res.write(prefix + 'SUBJECT: ' + inspect(Imap.parseHeader(buffer).subject));
                 });
               });
               msg.once('attributes', function(attrs) {
-                res.write(prefix + 'Attributes: '+ inspect(attrs, false, 8));
+                //res.write(prefix + 'Attributes: '+ inspect(attrs, false, 8));
               });
               msg.once('end', function() {
-                res.write(prefix + 'Finished');
+                //res.write(prefix + 'Finished');
               });
             });
             f.once('error', function(err) {
               res.write('Fetch error: ' + err);
             });
             f.once('end', function() {
-              res.write('Done fetching all messages!');
+              //res.write('Done fetching all messages!');
               imap.end();
             });
           });
@@ -201,7 +201,7 @@ var SampleApp = function() {
         });
 
         imap.once('end', function() {
-          res.write('Connection ended');
+          //res.write('Connection ended');
           res.end();
         });
 
