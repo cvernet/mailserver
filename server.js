@@ -178,14 +178,14 @@ var SampleApp = function() {
                 });
                 stream.once('end', function() {
                   //res.write(prefix + 'Parsed header: ' + inspect(Imap.parseHeader(buffer)));
-                  res.write('TO: ' + inspect(Imap.parseHeader(buffer).to));
+                  res.write('FROM: ' + inspect(Imap.parseHeader(buffer).from));
                   res.write('SUBJECT: ' + inspect(Imap.parseHeader(buffer).subject));
                   res.write('DATE: ' + inspect(Imap.parseHeader(buffer).date) + '\n');
                   
                   var item = {
-                       "to": inspect(Imap.parseHeader(buffer).to),
+                       "from": inspect(Imap.parseHeader(buffer).from),
                        "subject": inspect(Imap.parseHeader(buffer).subject),
-                       "date": inspect(Imap.parseHeader(buffer).to)
+                       "date": inspect(Imap.parseHeader(buffer).date)
                   };
                   
                   myarray.push(item);
@@ -197,16 +197,16 @@ var SampleApp = function() {
               });
               msg.once('end', function() {
                 //res.write(prefix + 'Finished');
-                myJSON = JSON.stringify(myarray);
-                res.write(myJSON);
-
+         
               });
             });
             f.once('error', function(err) {
               res.write('Fetch error: ' + err);
             });
             f.once('end', function() {
-              //res.write('Done fetching all messages!');
+              res.write('Done fetching all messages!\n');
+              myJSON = JSON.stringify(myarray);
+              res.write(myJSON);
               imap.end();
             });
           });
