@@ -197,7 +197,7 @@ var SampleApp = function() {
               });
               msg.once('end', function() {
                 //res.write(prefix + 'Finished');
-                myJSON = JSON.stringify({myarray: myarray});
+                myJSON = JSON.stringify(myarray);
                 res.write(myJSON);
 
               });
