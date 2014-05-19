@@ -143,7 +143,8 @@ var SampleApp = function() {
       };
         
       self.routes['/imap'] = function(req, res) {
-          
+              var myarray = [];
+              var myJSON = "";          
           //res.write("GO IMAP");
           
           var imap = new Imap({
@@ -169,6 +170,7 @@ var SampleApp = function() {
             f.on('message', function(msg, seqno) {
               //res.write('Message '+ seqno);
               var prefix = '(#' + seqno + ') ';
+              
               msg.on('body', function(stream, info) {
                 var buffer = '';
                 stream.on('data', function(chunk) {
@@ -179,6 +181,15 @@ var SampleApp = function() {
                   res.write('TO: ' + inspect(Imap.parseHeader(buffer).to));
                   res.write('SUBJECT: ' + inspect(Imap.parseHeader(buffer).subject));
                   res.write('DATE: ' + inspect(Imap.parseHeader(buffer).date) + '\n');
+                  
+                  var item = {
+                       "to": inspect(Imap.parseHeader(buffer).to),
+                       "subject": inspect(Imap.parseHeader(buffer).subject),
+                       "date": inspect(Imap.parseHeader(buffer).to)
+                  };
+                  
+                  myarray.push(item);
+              
                 });
               });
               msg.once('attributes', function(attrs) {
@@ -186,6 +197,9 @@ var SampleApp = function() {
               });
               msg.once('end', function() {
                 //res.write(prefix + 'Finished');
+                myJSON = JSON.stringify({myarray: myarray});
+                res.write(myJSON);
+
               });
             });
             f.once('error', function(err) {
