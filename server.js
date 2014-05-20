@@ -178,9 +178,9 @@ var SampleApp = function() {
                 });
                 stream.once('end', function() {
                   //res.write(prefix + 'Parsed header: ' + inspect(Imap.parseHeader(buffer)));
-                  res.write('FROM: ' + inspect(Imap.parseHeader(buffer).from));
-                  res.write('SUBJECT: ' + inspect(Imap.parseHeader(buffer).subject));
-                  res.write('DATE: ' + inspect(Imap.parseHeader(buffer).date) + '\n');
+                  //res.write('FROM: ' + inspect(Imap.parseHeader(buffer).from));
+                  //res.write('SUBJECT: ' + inspect(Imap.parseHeader(buffer).subject));
+                  //res.write('DATE: ' + inspect(Imap.parseHeader(buffer).date) + '\n');
                   
                   var item = {
                        "from": inspect(Imap.parseHeader(buffer).from),
