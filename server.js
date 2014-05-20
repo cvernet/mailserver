@@ -143,6 +143,10 @@ var SampleApp = function() {
       };
         
       self.routes['/imap'] = function(req, res) {
+          res.setHeader('Access-Control-Allow-Origin', 'http://cvernet.host-ed.me');
+          res.setHeader('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
+          if (req.method == 'OPTIONS') {res.send("200");}
+              
               var myarray = [];
               var myJSON = "";          
           //res.write("GO IMAP");
