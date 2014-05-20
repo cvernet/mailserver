@@ -204,7 +204,7 @@ var SampleApp = function() {
               res.write('Fetch error: ' + err);
             });
             f.once('end', function() {
-              res.write('Done fetching all messages!\n');
+              //res.write('Done fetching all messages!\n');
               myJSON = JSON.stringify(myarray);
               res.write(myJSON);
               imap.end();
