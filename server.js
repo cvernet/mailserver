@@ -258,8 +258,8 @@ var SampleApp = function() {
         var smtpTransport = nodemailer.createTransport("SMTP",{
             service: "Gmail",
             auth: {
-                user: "cvernet@gmail.com",
-                pass: "schdln_cver"
+                user: "cversandbox@gmail.com",
+                pass: "mysandbox"
             }
         });
 
