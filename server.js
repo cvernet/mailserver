@@ -230,7 +230,95 @@ var SampleApp = function() {
 
       };
           
-        
+      self.routes['/imapsent'] = function(req, res) {
+          res.setHeader('Access-Control-Allow-Origin', 'http://cvernet.host-ed.me');
+          res.setHeader('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
+          if (req.method == 'OPTIONS') {res.send("200");}
+              
+              var myarray = [];
+              var myJSON = "";          
+          //res.write("GO IMAP");
+          
+          var imap = new Imap({
+          user: 'cversandbox@gmail.com',
+          password: 'mysandbox',
+          host: 'imap.gmail.com',
+          port: 993,
+          tls: true
+        });
+
+        function openInbox(cb) {
+          imap.openBox('[Gmail]/Sent Mail', true, cb);
+          //res.write("Open Inbox");
+        }
+
+        imap.once('ready', function() {
+          openInbox(function(err, box) {
+            if (err) throw err;
+            var f = imap.seq.fetch('1:30', {
+              bodies: 'HEADER.FIELDS (FROM TO SUBJECT DATE)',
+              struct: true
+            });
+            f.on('message', function(msg, seqno) {
+              //res.write('Message '+ seqno);
+              var prefix = '(#' + seqno + ') ';
+              
+              msg.on('body', function(stream, info) {
+                var buffer = '';
+                stream.on('data', function(chunk) {
+                  buffer += chunk.toString('utf8');
+                });
+                stream.once('end', function() {
+                  //res.write(prefix + 'Parsed header: ' + inspect(Imap.parseHeader(buffer)));
+                  //res.write('FROM: ' + inspect(Imap.parseHeader(buffer).from));
+                  //res.write('SUBJECT: ' + inspect(Imap.parseHeader(buffer).subject));
+                  //res.write('DATE: ' + inspect(Imap.parseHeader(buffer).date) + '\n');
+                  
+                  var item = {
+                       "from": inspect(Imap.parseHeader(buffer).from),
+                       "subject": inspect(Imap.parseHeader(buffer).subject),
+                       "date": inspect(Imap.parseHeader(buffer).date)
+                  };
+                  
+                  myarray.push(item);
+              
+                });
+              });
+              msg.once('attributes', function(attrs) {
+                //res.write(prefix + 'Attributes: '+ inspect(attrs, false, 8));
+              });
+              msg.once('end', function() {
+                //res.write(prefix + 'Finished');
+         
+              });
+            });
+            f.once('error', function(err) {
+              res.write('Fetch error: ' + err);
+            });
+            f.once('end', function() {
+              //res.write('Done fetching all messages!\n');
+              myJSON = JSON.stringify(myarray);
+              res.write(myJSON);
+              imap.end();
+            });
+          });
+        });
+
+        imap.once('error', function(err) {
+          res.write(err);
+        });
+
+        imap.once('end', function() {
+          //res.write('Connection ended');
+          res.end();
+        });
+
+        imap.connect();
+          
+
+      };
+      
+              
      self.routes['/post'] = function(req, res) {
 //         res.send('here '+req.method);
 //         
