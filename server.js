@@ -248,7 +248,7 @@ var SampleApp = function() {
         });
 
         function openInbox(cb) {
-          imap.openBox('[Gmail]/Sent Mail', true, cb);
+          imap.openBox('INBOX', true, cb);
           //res.write("Open Inbox");
         }
 
