@@ -115,8 +115,8 @@ var SampleApp = function() {
         var smtpTransport = nodemailer.createTransport("SMTP",{
             service: "Gmail",
             auth: {
-                user: "cvernet@gmail.com",
-                pass: "schdln_cver"
+                user: "cversandbox@gmail.com",
+                pass: "mysandbox"
             }
         });
 
@@ -152,8 +152,8 @@ var SampleApp = function() {
           //res.write("GO IMAP");
           
           var imap = new Imap({
-          user: 'cvernet@gmail.com',
-          password: 'schdln_cver',
+          user: 'cversandbox@gmail.com',
+          password: 'mysandbox',
           host: 'imap.gmail.com',
           port: 993,
           tls: true
