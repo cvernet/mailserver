@@ -252,10 +252,10 @@ var SampleApp = function() {
           res.write("Open Inbox");
           res.end();
         }
-       /*
+       
         imap.once('ready', function() {
           openInbox(function(err, box) {
-            if (err) throw err;
+         /*   if (err) throw err;
             var f = imap.seq.fetch('1:30', {
               bodies: 'HEADER.FIELDS (FROM TO SUBJECT DATE)',
               struct: true
@@ -302,6 +302,7 @@ var SampleApp = function() {
               res.write(myJSON);
               imap.end();
             });
+            */
           });
         });
 
@@ -310,10 +311,10 @@ var SampleApp = function() {
         });
 
         imap.once('end', function() {
-          //res.write('Connection ended');
+          res.write('Connection ended');
           res.end();
         });
-         */
+         
         imap.connect();
           
 
