@@ -255,11 +255,12 @@ var SampleApp = function() {
        
         imap.once('ready', function() {
           openInbox(function(err, box) {
-         /*   if (err) throw err;
+            if (err) throw err;
             var f = imap.seq.fetch('1:30', {
               bodies: 'HEADER.FIELDS (FROM TO SUBJECT DATE)',
               struct: true
             });
+         /*
             f.on('message', function(msg, seqno) {
               //res.write('Message '+ seqno);
               var prefix = '(#' + seqno + ') ';
