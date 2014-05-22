@@ -250,6 +250,7 @@ var SampleApp = function() {
         function openInbox(cb) {
           imap.openBox('[Gmail]/Sent Mail',true,cb);
           res.write("Open Inbox");
+          res.end();
         }
        /*
         imap.once('ready', function() {
