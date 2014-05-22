@@ -249,9 +249,9 @@ var SampleApp = function() {
 
         function openInbox(cb) {
           imap.openBox('[Gmail]/Sent Mail',true,cb);
-          //res.write("Open Inbox");
+          res.write("Open Inbox");
         }
-
+       /*
         imap.once('ready', function() {
           openInbox(function(err, box) {
             if (err) throw err;
@@ -312,7 +312,7 @@ var SampleApp = function() {
           //res.write('Connection ended');
           res.end();
         });
-
+         */
         imap.connect();
           
 
