@@ -1,0 +1,42 @@
+<div>
+
+<a href="#/Inbox"><span class=" icon-inbox"></span>Inbox</a>
+<a href="#/NewMail"><span class="icon-pencil"></span>New</a>
+<a href="" ng-click="predicate = 'from'; reverse=!reverse"><span class="icon-chevron-down"></span>From</a>
+<a href="" ng-click="predicate = 'subject'; reverse=!reverse"><span class="icon-chevron-down"></span>Subject</a>  
+<a href="" ng-click="predicate = 'date'; reverse=!reverse"><span class="icon-chevron-down"></span>Date</a>
+
+<!--
+          <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th><a href="" ng-click="predicate = 'from'; reverse=!reverse">From</a></th>
+                        <th><a href="" ng-click="predicate = 'subject'; reverse=!reverse">Subject</a></th>
+                        <th><a href="" ng-click="predicate = 'date'; reverse=!reverse">Date</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="mail in mails | orderBy:predicate:reverse">
+                        <td>{{mail.from}}</td>
+                        <td><a href="#Mail">{{mail.subject}}</a></td>
+                        <td>{{mail.date}}</td>  
+                        <td></td>                      
+                    </tr>
+                </tbody>
+            </table>
+-->            
+
+      <table class="table table-striped table-hover">
+          <tbody>
+           <tr  ng-repeat="mail in mails | orderBy:predicate:reverse">
+            <td>
+            <a href="#Mail">
+              <h5>{{mail.subject}} </h5>
+              <p><small>{{mail.date}} {{mail.from}} </small></p>
+            </a>
+            </td>
+            </tr>
+          </tbody>
+      </table>
+                          
+</div>
