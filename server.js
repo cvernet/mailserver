@@ -328,7 +328,8 @@ var SampleApp = function() {
 //         res.send('here '+req.method);
 //         
 
-    res.setHeader('Access-Control-Allow-Origin', 'http://cvernet.host-ed.me');
+    //res.setHeader('Access-Control-Allow-Origin', 'http://cvernet.host-ed.me');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
          if (req.method == 'OPTIONS') {res.send("200");}
          
